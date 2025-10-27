@@ -167,5 +167,23 @@ Invalid AWS token	Run aws configure --profile booklending again
 Dockerfile not found	Ensure you run docker build from the project root
 Author
 
+README tweak
+
+Ports:
+
+dotnet run → http://localhost:5280
+
+Docker/Compose → http://localhost:8080
+
+Env var for local: set DDB_SERVICE_URL=http://localhost:8000 when running locally or pass via Docker env.
+
+Create table locally: show the exact aws dynamodb create-table ... --endpoint-url http://localhost:8000 command (as above).
+
+Common errors:
+
+Locked exe (MSB3021/MSB3027): kill dotnet.exe and delete bin/obj.
+
+InvalidClientTokenId: you forgot --endpoint-url and hit real AWS.
+
 Rizwan Kler
 October 2025
