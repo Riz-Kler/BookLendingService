@@ -1,5 +1,4 @@
 using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DataModel;
 using Amazon.Runtime;
 using BookLending.Api.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -8,11 +7,11 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// AWS DynamoDB Local setup
+var ddbUrl = Environment.GetEnvironmentVariable("DDB_SERVICE_URL") ?? "http://localhost:8000";
+var ddbConfig = new AmazonDynamoDBConfig { ServiceURL = ddbUrl };
+
 builder.Services.AddSingleton<IAmazonDynamoDB>(_ =>
-    new AmazonDynamoDBClient(
-        new BasicAWSCredentials("dummy", "dummy"),
-        new AmazonDynamoDBConfig { ServiceURL = "http://localhost:8000" }));
+    new AmazonDynamoDBClient(new BasicAWSCredentials("dummy", "dummy"), ddbConfig));
 
 builder.Services.AddSingleton<IBookRepository, DynamoDbBookRepository>();
 builder.Services.AddControllers();
