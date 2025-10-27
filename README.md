@@ -185,5 +185,10 @@ Locked exe (MSB3021/MSB3027): kill dotnet.exe and delete bin/obj.
 
 InvalidClientTokenId: you forgot --endpoint-url and hit real AWS.
 
+
+## Notes
+This implementation includes a Swagger UI adapted from a prior .NET API project to accelerate development. 
+All configurations have been refactored for the BookLendingService context and verified against DynamoDB Local.
+
 Rizwan Kler
 October 2025
