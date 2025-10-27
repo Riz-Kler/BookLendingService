@@ -1,0 +1,19 @@
+# Build output
+bin/
+obj/
+
+# VS / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+
+# ASP.NET local settings
+**/Properties/launchSettings.json
+
+# Logs & caches
+*.log
+*.cache
+
+# Accidental Windows device file
+nul

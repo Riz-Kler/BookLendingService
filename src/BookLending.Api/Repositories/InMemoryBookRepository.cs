@@ -21,7 +21,7 @@ public class InMemoryBookRepository : IBookRepository
     public Task UpdateAsync(Book book)
     {
         var existing = _books.FirstOrDefault(x => x.Id == book.Id);
-        if (existing != null)
+        if (existing is not null)
         {
             existing.Title = book.Title;
             existing.Author = book.Author;
