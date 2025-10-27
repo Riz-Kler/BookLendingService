@@ -1,149 +1,171 @@
-BookLendingService – DynamoDB Local Implementation
-1. Overview
+BookLendingService
+Overview
 
-This project implements a simple Book Lending API using .NET 8 and AWS DynamoDB Local.
-It allows you to add, list, check out, and return books.
-All data is stored in a local DynamoDB instance running in Docker.
+ASP.NET Core 8 Web API for managing a simple book lending system.
+Uses Amazon DynamoDB as the datastore and supports both:
 
-2. Prerequisites
+Local development with DynamoDB Local
+
+AWS deployment on ECS Fargate using Terraform (Infrastructure as Code)
+
+1. Run Locally
+Prerequisites
 
 .NET 8 SDK
 
-Docker Desktop (required for DynamoDB Local)
+Docker Desktop
 
-AWS CLI (optional, used to create the table)
+AWS CLI v2
 
-3. Running DynamoDB Local in Docker
-
-Make sure Docker Desktop is running.
-
-Open PowerShell and run from the BookLendingService folder:
-
+Start DynamoDB Local
 docker run -d --name dynamodb-local -p 8000:8000 amazon/dynamodb-local
 
+Create the DynamoDB Table
+aws dynamodb create-table \
+  --table-name Books \
+  --attribute-definitions AttributeName=Id,AttributeType=S \
+  --key-schema AttributeName=Id,KeyType=HASH \
+  --billing-mode PAY_PER_REQUEST \
+  --endpoint-url http://localhost:8000 \
+  --region eu-west-2
 
-Verify that the container is running:
-
-docker ps
-
-
-You should see amazon/dynamodb-local listed.
-
-If you rebuild often, you can remove and restart the container:
-
-docker stop dynamodb-local && docker rm dynamodb-local
-docker run -d --name dynamodb-local -p 8000:8000 amazon/dynamodb-local
-
-4. Create the DynamoDB Table
-
-Run this command to create the Books table (from any terminal with AWS CLI configured):
-
-For Command Prompt:
-
-aws dynamodb create-table ^
-  --table-name Books ^
-  --attribute-definitions AttributeName=Id,AttributeType=S ^
-  --key-schema AttributeName=Id,KeyType=HASH ^
-  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 ^
-  --endpoint-url http://localhost:8000
-
-
-For PowerShell:
-Use backticks (`) instead of carets, or paste the command as a single line.
-
-5. Run the API
-
-From the BookLendingService folder:
-
+Run the API
 dotnet run --project "src/BookLending.Api/BookLending.Api.csproj" --urls "http://localhost:5280"
 
+Test the Endpoints
+# Add a book
+curl -X POST http://localhost:5280/books \
+  -H "Content-Type: application/json" \
+  -d '{ "title":"Clean Code", "author":"Robert C. Martin" }'
 
-The API will start and connect automatically to DynamoDB Local at
-http://localhost:8000.
-
-6. Test the API
-
-Open a new terminal and run the following commands.
-
-Add a book
-
-curl -X POST http://localhost:5280/books ^
-  -H "Content-Type: application/json" ^
-  -d "{ \"title\": \"Clean Code\", \"author\": \"Robert C. Martin\" }"
-
-
-List all books
-
+# List all books
 curl http://localhost:5280/books
 
-
-Check out a book
-
+# Checkout / Return a book
 curl -X POST http://localhost:5280/books/{id}/checkout
-
-
-Return a book
-
 curl -X POST http://localhost:5280/books/{id}/return
 
+2. Optional: Run with Docker Compose
 
-Replace {id} with the Id returned from the add command.
-Each check-out or return updates the isAvailable flag in DynamoDB.
+Create a docker-compose.yml in the project root:
 
-7. Optional – Run the API in Docker
+version: "3.9"
+services:
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
 
-If you want to containerise the API itself, make sure you have the Dockerfile in the project root:
-
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 8080
-
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-COPY . .
-RUN dotnet restore
-RUN dotnet publish "src/BookLending.Api/BookLending.Api.csproj" -c Release -o /out
-
-FROM base AS final
-WORKDIR /app
-COPY --from=build /out .
-ENTRYPOINT ["dotnet", "BookLending.Api.dll"]
+  api:
+    build: .
+    container_name: book-lending-api
+    environment:
+      DDB_SERVICE_URL: http://dynamodb:8000
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dynamodb
 
 
-Then build and run:
+Run both containers:
+
+docker compose up --build -d
+
+
+Then test:
+
+curl http://localhost:8080/books
+
+3. Containerization (Dockerfile)
+
+A Dockerfile is already included. It uses multi-stage .NET publish and exposes port 8080.
 
 docker build -t book-lending-api .
-docker run -p 8080:8080 book-lending-api
+docker run -p 8080:8080 \
+  -e DDB_SERVICE_URL=http://host.docker.internal:8000 \
+  book-lending-api
+
+4. Deploy to AWS (ECS Fargate via Terraform)
+Step 1 – Build and Push to ECR
+AWS_REGION=eu-west-2
+APP_NAME=book-lending-api
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+aws ecr create-repository --repository-name $APP_NAME --region $AWS_REGION 2>/dev/null || true
+
+aws ecr get-login-password --region $AWS_REGION \
+| docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
+docker build -t $APP_NAME .
+docker tag $APP_NAME:latest $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
+docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
+
+Step 2 – Configure AWS Credentials (PowerShell example)
+aws configure --profile booklending
+$env:AWS_PROFILE = "booklending"
+aws sts get-caller-identity
+$env:ACCOUNT_ID = (aws sts get-caller-identity --query Account --output text)
+
+Step 3 – Apply Terraform
+
+From your project root:
+
+cd infra/terraform
+
+terraform fmt
+terraform init -upgrade
+terraform validate
+
+terraform apply -auto-approve \
+  -var "region=eu-west-2" \
+  -var "image_uri=$ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/book-lending-api:latest"
 
 
-If DynamoDB Local runs outside the API container, set the ServiceURL in Program.cs to:
+When prompted for image_uri, enter:
 
-new AmazonDynamoDBConfig { ServiceURL = "http://host.docker.internal:8000" }
+123456789012.dkr.ecr.eu-west-2.amazonaws.com/book-lending-api:latest
 
-8. Troubleshooting
+Step 4 – Test the Deployed API
 
-File locked during build
+After deployment, Terraform outputs your ALB DNS name:
 
-error MSB3021: Unable to copy BookLending.Api.exe because it is being used by another process
-
-
-Run:
-
-taskkill /IM dotnet.exe /F
+alb_dns_name = "booklending-api-alb-xxxxxxx.eu-west-2.elb.amazonaws.com"
 
 
-Then rebuild.
+Test the API:
 
-DynamoDBContext warning
+curl http://booklending-api-alb-xxxxxxx.eu-west-2.elb.amazonaws.com/books
 
-'DynamoDBContext.DynamoDBContext(IAmazonDynamoDB)' is obsolete
+5. Notes
 
+Program.cs automatically connects to the local DynamoDB endpoint (DDB_SERVICE_URL) when running locally.
 
-This is safe to ignore. It only warns that AWS now recommends DynamoDBContextBuilder.
+In AWS, the ECS task uses IAM role-based authentication and connects to the DynamoDB regional endpoint.
 
-Verify container status
+Terraform provisions:
 
-docker ps
+DynamoDB Table
 
+ECS Cluster / Task Definition / Service
 
-Ensure that amazon/dynamodb-local is running on port 8000.
+Application Load Balancer (ALB)
+
+CloudWatch Logs
+
+IAM roles & policies
+
+Security Groups
+
+6. Troubleshooting
+Issue	Fix
+“Could not connect to server”	Use port 5280 for local run or 8080 in Docker
+“You must specify a region”	Add --region eu-west-2 or run aws configure
+File locked during rebuild	Run taskkill /IM dotnet.exe /F
+Invalid AWS token	Run aws configure --profile booklending again
+Dockerfile not found	Ensure you run docker build from the project root
+Author
+
+Rizwan Kler
+October 2025
