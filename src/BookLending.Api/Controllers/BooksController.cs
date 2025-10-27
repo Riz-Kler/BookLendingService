@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
+using BookLending.Api.Models;
+using BookLending.Api.Repositories;
+
+namespace BookLending.Api.Controllers;
+
 [ApiController]
 [Route("books")]
 public class BooksController : ControllerBase
@@ -6,7 +12,8 @@ public class BooksController : ControllerBase
     public BooksController(IBookRepository repo) => _repo = repo;
 
     [HttpGet]
-    public async Task<IActionResult> GetAll() => Ok(await _repo.GetAllAsync());
+    public async Task<IActionResult> GetAll() =>
+        Ok(await _repo.GetAllAsync());
 
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] Book book)
@@ -15,7 +22,7 @@ public class BooksController : ControllerBase
         return CreatedAtAction(nameof(GetAll), new { id = book.Id }, book);
     }
 
-    [HttpPost("{id}/checkout")]
+    [HttpPost("{id:guid}/checkout")]
     public async Task<IActionResult> Checkout(Guid id)
     {
         var book = await _repo.GetByIdAsync(id);
@@ -26,7 +33,7 @@ public class BooksController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost("{id}/return")]
+    [HttpPost("{id:guid}/return")]
     public async Task<IActionResult> Return(Guid id)
     {
         var book = await _repo.GetByIdAsync(id);
