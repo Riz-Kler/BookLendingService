@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="f94c1b56-92c3-44a9-a066-cd88c03f4d5c" name="Admin@DESKTOP-SF9B1Q6 2025-10-28 22:59:09" runUser="DESKTOP-SF9B1Q6\Admin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2025-10-28T22:59:09.1451415+00:00" queuing="2025-10-28T22:59:09.1451420+00:00" start="2025-10-28T22:58:59.1932869+00:00" finish="2025-10-28T22:59:09.1562756+00:00" />
+  <TestSettings name="default" id="86bd0f9c-279e-463f-b9c9-0b480214e1ec">
+    <Deployment runDeploymentRoot="Admin_DESKTOP-SF9B1Q6_2025-10-28_22_59_09" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f9da9f2f-83b7-412f-a36c-74fb709c89ad" testId="a31f7d1c-a190-8fa2-5b37-55e55ee55299" testName="BookLending.Api.Tests.BooksEndpointsTests.GetBooks_returns_200_and_json" computerName="DESKTOP-SF9B1Q6" duration="00:00:04.7317330" startTime="2025-10-28T22:59:08.4473749+00:00" endTime="2025-10-28T22:59:08.4473757+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9da9f2f-83b7-412f-a36c-74fb709c89ad" />
+    <UnitTestResult executionId="8431d275-bcee-442e-95f9-707a1ed95b6b" testId="e5e64254-62e8-e063-3024-a802de338838" testName="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_with_invalid_id_returns_400_or_404(rawId: &quot;not-a-guid&quot;)" computerName="DESKTOP-SF9B1Q6" duration="00:00:00.0114601" startTime="2025-10-28T22:59:08.8766663+00:00" endTime="2025-10-28T22:59:08.8766667+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8431d275-bcee-442e-95f9-707a1ed95b6b" />
+    <UnitTestResult executionId="a88ae1c5-3e1c-4560-a97c-30b4b4ac193e" testId="8ecbd635-d340-a973-0e13-f83e5831862c" testName="BookLending.Api.Tests.BooksEndpointsFlowTests.PostBooks_creates_book_and_returns_201_with_Location" computerName="DESKTOP-SF9B1Q6" duration="00:00:00.0100904" startTime="2025-10-28T22:59:08.5595915+00:00" endTime="2025-10-28T22:59:08.5595920+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a88ae1c5-3e1c-4560-a97c-30b4b4ac193e" />
+    <UnitTestResult executionId="dd03fd3d-9de9-48ef-9de3-a95e49abc658" testId="ae18608d-8394-ec81-9361-2054f89fdf2e" testName="BookLending.Api.Tests.BooksControllerTests.GetBooks_Returns200" computerName="DESKTOP-SF9B1Q6" duration="00:00:04.7278170" startTime="2025-10-28T22:59:08.4188372+00:00" endTime="2025-10-28T22:59:08.4188807+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dd03fd3d-9de9-48ef-9de3-a95e49abc658" />
+    <UnitTestResult executionId="42498eb0-92d6-473d-b613-3deb794792c0" testId="984d6ce9-6a5e-d7b4-4c44-77cdcf43925c" testName="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_then_Return_updates_availability_flags" computerName="DESKTOP-SF9B1Q6" duration="00:00:04.8760537" startTime="2025-10-28T22:59:08.5445081+00:00" endTime="2025-10-28T22:59:08.5445084+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42498eb0-92d6-473d-b613-3deb794792c0" />
+    <UnitTestResult executionId="cf51acc2-890e-4889-b2a9-fd091109ab89" testId="c500f097-fe71-67cf-b8d4-784d1e132c6b" testName="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_twice_returns_conflict_or_bad_request" computerName="DESKTOP-SF9B1Q6" duration="00:00:00.0947446" startTime="2025-10-28T22:59:08.7241572+00:00" endTime="2025-10-28T22:59:08.7241578+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cf51acc2-890e-4889-b2a9-fd091109ab89" />
+    <UnitTestResult executionId="78c05976-fc40-4c72-83c9-b5fed8677708" testId="0658f0b8-28c7-7d87-2b25-f558bd30b040" testName="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_with_invalid_id_returns_400_or_404(rawId: &quot;00000000-0000-0000-0000-000000000000&quot;)" computerName="DESKTOP-SF9B1Q6" duration="00:00:00.0065608" startTime="2025-10-28T22:59:08.8871936+00:00" endTime="2025-10-28T22:59:08.8871939+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="78c05976-fc40-4c72-83c9-b5fed8677708" />
+    <UnitTestResult executionId="8ce8ef29-6524-4dcf-a22e-eb7cc45eb21c" testId="16319d3d-8dac-f42b-828d-9ca4297577b3" testName="BookLending.Api.Tests.BooksEndpointsFlowTests.PostBooks_invalid_payload_returns_400" computerName="DESKTOP-SF9B1Q6" duration="00:00:00.1367400" startTime="2025-10-28T22:59:08.8620812+00:00" endTime="2025-10-28T22:59:08.8620815+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8ce8ef29-6524-4dcf-a22e-eb7cc45eb21c" />
+    <UnitTestResult executionId="8e9c177b-8a04-4e77-9b9d-8a6589c5fff6" testId="831cff16-0e08-f126-cf05-b01f74cb5572" testName="BookLending.Api.Tests.BooksEndpointsFlowTests.Return_when_not_checked_out_returns_conflict_or_bad_request" computerName="DESKTOP-SF9B1Q6" duration="00:00:00.0399831" startTime="2025-10-28T22:59:08.6214502+00:00" endTime="2025-10-28T22:59:08.6214508+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8e9c177b-8a04-4e77-9b9d-8a6589c5fff6" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_then_Return_updates_availability_flags" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="984d6ce9-6a5e-d7b4-4c44-77cdcf43925c">
+      <Execution id="42498eb0-92d6-473d-b613-3deb794792c0" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsFlowTests" name="Checkout_then_Return_updates_availability_flags" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsFlowTests.PostBooks_creates_book_and_returns_201_with_Location" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="8ecbd635-d340-a973-0e13-f83e5831862c">
+      <Execution id="a88ae1c5-3e1c-4560-a97c-30b4b4ac193e" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsFlowTests" name="PostBooks_creates_book_and_returns_201_with_Location" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsTests.GetBooks_returns_200_and_json" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="a31f7d1c-a190-8fa2-5b37-55e55ee55299">
+      <Execution id="f9da9f2f-83b7-412f-a36c-74fb709c89ad" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsTests" name="GetBooks_returns_200_and_json" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsFlowTests.PostBooks_invalid_payload_returns_400" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="16319d3d-8dac-f42b-828d-9ca4297577b3">
+      <Execution id="8ce8ef29-6524-4dcf-a22e-eb7cc45eb21c" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsFlowTests" name="PostBooks_invalid_payload_returns_400" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksControllerTests.GetBooks_Returns200" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="ae18608d-8394-ec81-9361-2054f89fdf2e">
+      <Execution id="dd03fd3d-9de9-48ef-9de3-a95e49abc658" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksControllerTests" name="GetBooks_Returns200" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_twice_returns_conflict_or_bad_request" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="c500f097-fe71-67cf-b8d4-784d1e132c6b">
+      <Execution id="cf51acc2-890e-4889-b2a9-fd091109ab89" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsFlowTests" name="Checkout_twice_returns_conflict_or_bad_request" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_with_invalid_id_returns_400_or_404(rawId: &quot;00000000-0000-0000-0000-000000000000&quot;)" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="0658f0b8-28c7-7d87-2b25-f558bd30b040">
+      <Execution id="78c05976-fc40-4c72-83c9-b5fed8677708" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsFlowTests" name="Checkout_with_invalid_id_returns_400_or_404" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsFlowTests.Checkout_with_invalid_id_returns_400_or_404(rawId: &quot;not-a-guid&quot;)" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="e5e64254-62e8-e063-3024-a802de338838">
+      <Execution id="8431d275-bcee-442e-95f9-707a1ed95b6b" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsFlowTests" name="Checkout_with_invalid_id_returns_400_or_404" />
+    </UnitTest>
+    <UnitTest name="BookLending.Api.Tests.BooksEndpointsFlowTests.Return_when_not_checked_out_returns_conflict_or_bad_request" storage="c:\users\admin\mastek tech test\booklendingservice\tests\booklending.api.tests\bin\debug\net8.0\booklending.api.tests.dll" id="831cff16-0e08-f126-cf05-b01f74cb5572">
+      <Execution id="8e9c177b-8a04-4e77-9b9d-8a6589c5fff6" />
+      <TestMethod codeBase="C:\Users\Admin\Mastek Tech Test\BookLendingService\tests\BookLending.Api.Tests\bin\Debug\net8.0\BookLending.Api.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="BookLending.Api.Tests.BooksEndpointsFlowTests" name="Return_when_not_checked_out_returns_conflict_or_bad_request" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="a31f7d1c-a190-8fa2-5b37-55e55ee55299" executionId="f9da9f2f-83b7-412f-a36c-74fb709c89ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e5e64254-62e8-e063-3024-a802de338838" executionId="8431d275-bcee-442e-95f9-707a1ed95b6b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8ecbd635-d340-a973-0e13-f83e5831862c" executionId="a88ae1c5-3e1c-4560-a97c-30b4b4ac193e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae18608d-8394-ec81-9361-2054f89fdf2e" executionId="dd03fd3d-9de9-48ef-9de3-a95e49abc658" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="984d6ce9-6a5e-d7b4-4c44-77cdcf43925c" executionId="42498eb0-92d6-473d-b613-3deb794792c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c500f097-fe71-67cf-b8d4-784d1e132c6b" executionId="cf51acc2-890e-4889-b2a9-fd091109ab89" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0658f0b8-28c7-7d87-2b25-f558bd30b040" executionId="78c05976-fc40-4c72-83c9-b5fed8677708" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16319d3d-8dac-f42b-828d-9ca4297577b3" executionId="8ce8ef29-6524-4dcf-a22e-eb7cc45eb21c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="831cff16-0e08-f126-cf05-b01f74cb5572" executionId="8e9c177b-8a04-4e77-9b9d-8a6589c5fff6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="9" executed="9" passed="9" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.21)&#xD;
+[xUnit.net 00:00:00.36]   Discovering: BookLending.Api.Tests&#xD;
+[xUnit.net 00:00:00.58]   Discovered:  BookLending.Api.Tests&#xD;
+[xUnit.net 00:00:00.60]   Starting:    BookLending.Api.Tests&#xD;
+     Warning:&#xD;
+     The component "Fluent Assertions" is governed by the rules defined in the Xceed License Agreement and&#xD;
+     the Xceed Fluent Assertions Community License. You may use Fluent Assertions free of charge for&#xD;
+     non-commercial use only. An active subscription is required to use Fluent Assertions for commercial use.&#xD;
+     Please contact Xceed Sales mailto:sales@xceed.com to acquire a subscription at a very low cost.&#xD;
+     A paid commercial license supports the development and continued increasing support of&#xD;
+     Fluent Assertions users under both commercial and community licenses. Help us&#xD;
+     keep Fluent Assertions at the forefront of unit testing.&#xD;
+     For more information, visit https://xceed.com/products/unit-testing/fluent-assertions/&#xD;
+[xUnit.net 00:00:06.01]   Finished:    BookLending.Api.Tests&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-SF9B1Q6" outcome="Warning" timestamp="2025-10-28T22:59:02.2685621+00:00">
+        <Text>Data collection : Unable to find a datacollector with friendly name 'XPlat Code Coverage'.</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-SF9B1Q6" outcome="Warning" timestamp="2025-10-28T22:59:02.2695317+00:00">
+        <Text>Data collection : Could not find data collector 'XPlat Code Coverage'</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>
