@@ -33,16 +33,21 @@ builder.Services.AddSwaggerGen(o =>
     });
 });
 
-// If DDB_SERVICE_URL is set (local/compose), use that.
-// Otherwise, let the SDK use AWS regional endpoints + default credentials (task role).
-var ddbUrl = Environment.GetEnvironmentVariable("DDB_SERVICE_URL");
+// Read from configuration (works for appsettings, env vars, in-memory, etc.)
+var ddbUrl  = builder.Configuration["DDB_SERVICE_URL"];
+var region  = builder.Configuration["AWS_REGION"] ?? "eu-west-2";
 
-IAmazonDynamoDB ddbClient = ddbUrl is not null
-    ? new AmazonDynamoDBClient(new BasicAWSCredentials("dummy", "dummy"),
-        new AmazonDynamoDBConfig { ServiceURL = ddbUrl })
-    : new AmazonDynamoDBClient(); // uses task role / default chain in AWS
+IAmazonDynamoDB ddbClient =
+    ddbUrl is not null
+        ? new AmazonDynamoDBClient(
+              new BasicAWSCredentials("dummy","dummy"),
+              new AmazonDynamoDBConfig { ServiceURL = ddbUrl })
+        : new AmazonDynamoDBClient(new AmazonDynamoDBConfig {
+              RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(region)
+          });
 
 builder.Services.AddSingleton(ddbClient);
+
 // Register your repository (switch to DynamoDbBookRepository when needed)
 builder.Services.AddSingleton<IBookRepository, InMemoryBookRepository>();
 builder.Services.AddControllers();
