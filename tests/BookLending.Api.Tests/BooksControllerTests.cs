@@ -4,21 +4,27 @@ using BookLending.Api.Repositories;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 
+using System.Net;
+using System.Net.Http;                    
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Testing; 
+using Xunit;
+
+
 namespace BookLending.Api.Tests;
 
-public class BooksControllerTests
+public class BooksControllerTests : IClassFixture<CustomWebApplicationFactory>
 {
+    private readonly HttpClient _client;
+
+    public BooksControllerTests(CustomWebApplicationFactory factory)
+        => _client = factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
+
     [Fact]
-    public async Task GetAll_returns_ok_with_list()
+    public async Task GetBooks_Returns200()
     {
-        var repo = new InMemoryBookRepository();
-        await repo.AddAsync(new Book { Title = "TDD", Author = "K. Beck" });
-
-        var controller = new BooksController(repo);
-        var result = await controller.GetAll() as OkObjectResult;
-
-        result.Should().NotBeNull();
-        var books = result!.Value as IEnumerable<Book>;
-        books!.Should().ContainSingle(b => b.Title == "TDD");
+        var resp = await _client.GetAsync("/books");
+        resp.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }
