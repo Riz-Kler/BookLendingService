@@ -28,3 +28,18 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# build output
+bin/
+obj/
+TestResults/
+*.trx
+
+# VS / Rider
+.vs/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+

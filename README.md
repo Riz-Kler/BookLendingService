@@ -1,3 +1,32 @@
+# 📚 BookLendingService  
+[![.NET 8](https://img.shields.io/badge/.NET-8.0-blueviolet?logo=dotnet)](https://dotnet.microsoft.com/)
+[![Tests Passing](https://img.shields.io/badge/tests-passing-brightgreen?logo=xunit)](https://github.com/Riz-Kler/BookLendingService/releases/tag/v1.1.0-test-suite)
+[![xUnit](https://img.shields.io/badge/tested%20with-xUnit-orange?logo=xunit)](https://xunit.net/)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/Riz-Kler/BookLendingService?label=latest%20release&color=success)](https://github.com/Riz-Kler/BookLendingService/releases/latest)
+
+---
+
+✅ **Latest Release:** [v1.1.0-test-suite](https://github.com/Riz-Kler/BookLendingService/releases/tag/v1.1.0-test-suite)  
+🧪 **Includes:** Full integration test suite using FluentAssertions, WebApplicationFactory, and xUnit  
+📦 **Framework:** .NET 8.0 (minimal API, in-memory hosting)  
+🧰 **CI-Ready:** Can run locally or in future GitHub Actions workflows  
+
+---
+
+## 🧪 Running the Test Suite Locally
+
+You can execute all tests **without** starting the API or Docker — everything runs using the in-memory test server.
+
+### 🪟 **Windows (PowerShell)**
+
+1. Allow PowerShell script execution (one-time only):
+   ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+
+
+
 BookLendingService
 Overview
 
@@ -189,6 +218,41 @@ InvalidClientTokenId: you forgot --endpoint-url and hit real AWS.
 ## Notes
 This implementation includes a Swagger UI adapted from a prior .NET API project to accelerate development. 
 All configurations have been refactored for the BookLendingService context and verified against DynamoDB Local.
+
+## 🚀 Next steps
+
+### 1) CI: run tests + coverage on every push/PR
+Create `.github/workflows/tests.yml`:
+
+```yaml
+name: .NET Tests
+
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Debug --no-restore
+      - name: Test (with coverage)
+        run: dotnet test tests/BookLending.Api.Tests/BookLending.Api.Tests.csproj --configuration Debug --no-build --collect:"XPlat Code Coverage" --results-directory TestResults
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: TestResults
+
 
 Rizwan Kler
 October 2025
